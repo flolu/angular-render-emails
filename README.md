@@ -19,6 +19,5 @@
 
 # TODO
 
-- setup sample components for emails
 - send emails
 - make k8s deployment work

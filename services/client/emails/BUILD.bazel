@@ -1,0 +1,22 @@
+load("//tools:angular_ts_library.bzl", "ng_ts_library")
+load("@io_bazel_rules_sass//:defs.bzl", "multi_sass_binary")
+
+package(default_visibility = ["//services/client:__subpackages__"])
+
+multi_sass_binary(
+    name = "styles",
+    srcs = glob(include = ["**/*.sass"]),
+)
+
+ng_ts_library(
+    name = "emails",
+    srcs = glob(["*.ts"]),
+    angular_assets = [":styles"],
+    tsconfig = "//services/client:tsconfig.json",
+    deps = [
+        "//services/client/environment",
+        "@npm//@angular/common",
+        "@npm//@angular/core",
+        "@npm//@angular/router",
+    ],
+)

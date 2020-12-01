@@ -18,6 +18,7 @@ ng_ts_library(
     angular_assets = [":styles"],
     tsconfig = "//services/client:tsconfig.json",
     deps = [
+        "//services/client/emails",
         "//services/client/environment",
         "@npm//@angular/common",
         "@npm//@angular/core",
