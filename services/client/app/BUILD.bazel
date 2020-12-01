@@ -1,0 +1,68 @@
+load("@io_bazel_rules_sass//:defs.bzl", "multi_sass_binary")
+load("//tools:angular_ts_library.bzl", "ng_ts_library")
+
+package(default_visibility = ["//services/client:__subpackages__"])
+
+multi_sass_binary(
+    name = "styles",
+    srcs = glob(include = ["**/*.sass"]),
+)
+
+ng_ts_library(
+    name = "base",
+    srcs = [
+        "app.component.ts",
+        "app-base.module.ts",
+        "app-routing.module.ts",
+        "service-worker.service.ts",
+    ],
+    angular_assets = [":styles"],
+    tsconfig = "//services/client:tsconfig.json",
+    deps = [
+        "//services/client/environment",
+        "@npm//@angular/common",
+        "@npm//@angular/core",
+        "@npm//@angular/platform-browser",
+        "@npm//@angular/router",
+        "@npm//@angular/service-worker",
+        "@npm//rxjs",
+    ],
+)
+
+ng_ts_library(
+    name = "dev",
+    srcs = ["app-dev.module.ts"],
+    tsconfig = "//services/client:tsconfig.json",
+    deps = [
+        ":base",
+        "//services/client/environment",
+        "@npm//@angular/core",
+        "@npm//@angular/service-worker",
+    ],
+)
+
+ng_ts_library(
+    name = "prod",
+    srcs = ["app-prod.module.ts"],
+    tsconfig = "//services/client:tsconfig.json",
+    deps = [
+        ":base",
+        "//services/client/environment",
+        "@npm//@angular/common",
+        "@npm//@angular/core",
+        "@npm//@angular/service-worker",
+        "@npm//rxjs",
+    ],
+)
+
+ng_ts_library(
+    name = "server",
+    srcs = ["app.server.module.ts"],
+    tsconfig = "//services/client:tsconfig.json",
+    deps = [
+        ":base",
+        ":prod",
+        "@npm//@angular/core",
+        "@npm//@angular/platform-server",
+    ],
+)
