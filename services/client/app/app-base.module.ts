@@ -4,11 +4,10 @@ import {NgModule} from '@angular/core'
 import {ENVIRONMENT, environment} from '@client/environment'
 import {AppComponent} from './app.component'
 import {AppRoutingModule} from './app-routing.module'
-import {ServiceWorkerService} from './service-worker.service'
 
 @NgModule({
   imports: [BrowserModule.withServerTransition({appId: 'angular_render_emails'}), AppRoutingModule],
   declarations: [AppComponent],
-  providers: [ServiceWorkerService, {provide: ENVIRONMENT, useValue: environment}],
+  providers: [{provide: ENVIRONMENT, useValue: environment}],
 })
 export class AppBaseModule {}

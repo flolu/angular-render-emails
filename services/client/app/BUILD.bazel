@@ -14,7 +14,6 @@ ng_ts_library(
         "app.component.ts",
         "app-base.module.ts",
         "app-routing.module.ts",
-        "service-worker.service.ts",
     ],
     angular_assets = [":styles"],
     tsconfig = "//services/client:tsconfig.json",
@@ -24,7 +23,6 @@ ng_ts_library(
         "@npm//@angular/core",
         "@npm//@angular/platform-browser",
         "@npm//@angular/router",
-        "@npm//@angular/service-worker",
         "@npm//rxjs",
     ],
 )
@@ -37,7 +35,6 @@ ng_ts_library(
         ":base",
         "//services/client/environment",
         "@npm//@angular/core",
-        "@npm//@angular/service-worker",
     ],
 )
 
@@ -50,7 +47,6 @@ ng_ts_library(
         "//services/client/environment",
         "@npm//@angular/common",
         "@npm//@angular/core",
-        "@npm//@angular/service-worker",
         "@npm//rxjs",
     ],
 )

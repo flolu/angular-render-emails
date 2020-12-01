@@ -19,8 +19,6 @@
 
 # TODO
 
-- remove service worker
-- remove pwa features
 - setup sample components for emails
 - send emails
 - make k8s deployment work

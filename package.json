@@ -22,7 +22,6 @@
     "@angular/platform-browser-dynamic": "^10.1.4",
     "@angular/platform-server": "^10.1.4",
     "@angular/router": "^10.1.4",
-    "@angular/service-worker": "^10.1.4",
     "@nguniversal/express-engine": "^10.1.0",
     "express": "^4.17.1",
     "faker": "^5.1.0",

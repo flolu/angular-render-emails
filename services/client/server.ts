@@ -11,7 +11,7 @@ enableProdMode()
 
 const app = express()
 const PORT = process.env.PORT || 8080
-const DIST_FOLDER = join(process.cwd(), 'services/client/web_pwa')
+const DIST_FOLDER = join(process.cwd(), 'services/client/web_app')
 
 app.engine('html', ngExpressEngine({bootstrap: AppServerModule}) as any)
 app.set('view engine', 'html')

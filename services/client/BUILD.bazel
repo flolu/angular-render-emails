@@ -8,7 +8,6 @@ load("@io_bazel_rules_docker//nodejs:image.bzl", "nodejs_image")
 load("@k8s_deploy//:defaults.bzl", "k8s_deploy")
 load("//tools:angular_ts_library.bzl", "ng_ts_library")
 load("//tools:insert_html_assets.bzl", "insert_html_assets")
-load("//tools:pkg_pwa.bzl", "pkg_pwa")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -72,7 +71,6 @@ ts_devserver(
         "//services/client/assets",
         ":inject_scripts_for_dev",
         ":styles.css",
-        ":favicon.ico",
     ],
     deps = ["//services/client:dev_src"],
 )
@@ -131,8 +129,6 @@ pkg_web(
         "main.html",
         ":asset_injected_index_html",
         ":bundle.min",
-        ":favicon.ico",
-        ":robots.txt",
         ":styles.css",
         "//services/client/assets",
         "@npm//:node_modules/zone.js/dist/zone.min.js",
@@ -143,44 +139,6 @@ history_server(
     name = "app_server",
     data = [":web_app"],
     templated_args = ["-a $$(rlocation $(rootpath :web_app))"],
-)
-
-insert_html_assets(
-    name = "asset_injected_pwa_index_html",
-    outs = ["_/index.html"],
-    asset_paths = [
-        "$(execpath styles.css)",
-        "$(execpath @npm//:node_modules/zone.js/dist/zone.min.js)",
-        "$(execpath bundle.min)/index.es2015.js",
-    ],
-    data = [
-        ":bundle.min",
-        ":main.html",
-        ":styles.css",
-        "@npm//:node_modules/zone.js/dist/zone.min.js",
-    ],
-    html_file = ":main.html",
-)
-
-pkg_pwa(
-    name = "web_pwa",
-    srcs = [
-        ":asset_injected_pwa_index_html",
-        ":bundle.min",
-        ":favicon.ico",
-        ":manifest.webmanifest",
-        ":robots.txt",
-        ":styles.css",
-        "//services/client/assets",
-    ],
-    index_html = ":asset_injected_pwa_index_html",
-    ngsw_config = ":ngsw-config.json",
-)
-
-history_server(
-    name = "pwa_server",
-    data = [":web_pwa"],
-    templated_args = ["-a $$(rlocation $(rootpath :web_pwa))"],
 )
 
 ts_library(
@@ -200,7 +158,7 @@ nodejs_binary(
     name = "client",
     data = [
         ":server_lib",
-        ":web_pwa",
+        ":web_app",
     ],
     entry_point = ":server.ts",
 )
@@ -209,7 +167,7 @@ nodejs_image(
     name = "prod_server_image",
     data = [
         ":server_lib",
-        ":web_pwa",
+        ":web_app",
     ],
     entry_point = ":server.ts",
 )
