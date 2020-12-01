@@ -1,3 +1,5 @@
+import {injectable, unmanaged} from 'inversify'
+
 import {FlatConfigKeys} from '@generated/config/flat-config-keys'
 
 /**
@@ -5,8 +7,9 @@ import {FlatConfigKeys} from '@generated/config/flat-config-keys'
  * It depends on environment variables only available
  * on the server!
  */
+@injectable()
 export class Config {
-  constructor(private config: Record<FlatConfigKeys | string, string> = {}) {}
+  constructor(@unmanaged() private config: Record<FlatConfigKeys | string, string> = {}) {}
 
   get(key: FlatConfigKeys, fallback?: string) {
     const value = this.config[key] || process.env[key] || fallback

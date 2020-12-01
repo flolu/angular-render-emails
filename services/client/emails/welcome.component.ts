@@ -3,10 +3,7 @@ import {ActivatedRoute} from '@angular/router'
 
 @Component({
   selector: 'are-welcome',
-  template: `
-    <h1>Hi, {{ name }}</h1>
-    <p>Welcome! You are reading an email that has been rendered with Angular on a NodeJs server.</p>
-  `,
+  templateUrl: 'welcome.component.html',
   styleUrls: ['welcome.component.sass'],
 })
 export class WelcomeComponent {

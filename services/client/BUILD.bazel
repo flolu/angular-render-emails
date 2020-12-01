@@ -21,16 +21,6 @@ sass_binary(
     src = "styles.sass",
 )
 
-ts_library(
-    name = "initialize_testbed",
-    testonly = True,
-    srcs = ["initialize_testbed.ts"],
-    deps = [
-        "@npm//@angular/core",
-        "@npm//@angular/platform-browser-dynamic",
-    ],
-)
-
 ng_ts_library(
     name = "dev_src",
     srcs = ["main.dev.ts"],
@@ -110,14 +100,12 @@ insert_html_assets(
     name = "asset_injected_index_html",
     outs = ["index.html"],
     asset_paths = [
-        "$(execpath styles.css)",
         "$(execpath @npm//:node_modules/zone.js/dist/zone.min.js)",
         "$(execpath bundle.min)/index.es2015.js",
     ],
     data = [
         ":bundle.min",
         ":main.html",
-        ":styles.css",
         "@npm//:node_modules/zone.js/dist/zone.min.js",
     ],
     html_file = ":main.html",
@@ -129,7 +117,6 @@ pkg_web(
         "main.html",
         ":asset_injected_index_html",
         ":bundle.min",
-        ":styles.css",
         "//services/client/assets",
         "@npm//:node_modules/zone.js/dist/zone.min.js",
     ],

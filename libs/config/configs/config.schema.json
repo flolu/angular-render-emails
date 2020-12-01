@@ -10,6 +10,19 @@
     },
     "mailClient": {
       "type": "string"
+    },
+    "mailing": {
+      "type": "object",
+      "properties": {
+        "from": {
+          "type": "string"
+        },
+        "fromName": {
+          "type": "string"
+        }
+      },
+      "required": ["from", "fromName"],
+      "additionalProperties": false
     }
   },
   "required": ["environment", "mailClient"],

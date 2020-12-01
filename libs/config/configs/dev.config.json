@@ -1,5 +1,9 @@
 {
   "$schema": "./config.schema.json",
   "environment": "dev",
-  "mailClient": "http://localhost:8080"
+  "mailClient": "http://localhost:8080",
+  "mailing": {
+    "from": "dev@drakery.com",
+    "fromName": "Drakery"
+  }
 }

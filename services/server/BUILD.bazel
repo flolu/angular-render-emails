@@ -9,7 +9,14 @@ ts_library(
     srcs = glob(["*.ts"]),
     deps = [
         "//libs/config:config_lib",
+        "@npm//@types/express",
         "@npm//@types/node",
+        "@npm//@types/node-mailjet",
+        "@npm//axios",
+        "@npm//express",
+        "@npm//inversify",
+        "@npm//node-mailjet",
+        "@npm//reflect-metadata",
     ],
 )
 
